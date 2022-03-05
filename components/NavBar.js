@@ -7,6 +7,7 @@ const NavBar = () => {
         <Logo>
             YT Tutorial Manager
         </Logo>
+        {/* TODO: Add conditional rendering here after setup of firebase auth */}
         <NavMenu>
             <NavItem>My Tutorials</NavItem>
             <NavItem>Contact Us</NavItem>
