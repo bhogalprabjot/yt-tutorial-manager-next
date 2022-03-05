@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
 export default Layout;
 
 const LayoutWrapper = tw.div`
-    h-screen  w-screen flex flex-col
+    h-screen  w-screen flex flex-col overflow-x-hidden
  `
 
 const Header = tw.header`

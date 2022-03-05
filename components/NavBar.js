@@ -1,6 +1,6 @@
 import React from 'react'
 import tw from "tailwind-styled-components"
-
+import Link from 'next/link'
 const NavBar = () => {
   return (
     <Wrapper>
@@ -9,7 +9,9 @@ const NavBar = () => {
         </Logo>
         {/* TODO: Add conditional rendering here after setup of firebase auth */}
         <NavMenu>
-            <NavItem>My Tutorials</NavItem>
+            <Link href='/my-learning'>
+            <NavItem>My Learning</NavItem>
+            </Link>
             <NavItem>Contact Us</NavItem>
         </NavMenu>
     </Wrapper>          
