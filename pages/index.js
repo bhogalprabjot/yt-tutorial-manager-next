@@ -2,13 +2,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import tw from "tailwind-styled-components"
-
+import Link from 'next/link'
 import youtube from '../api/youtube';
 import moment from 'moment';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  // const [selectedVideo, setSelectedVideo] = useState(null);
   const [search, setSearch] = useState('');
 
   let current = new Date();
@@ -46,9 +46,10 @@ export default function Home() {
       let years = moment(current.toISOString()).diff(moment(publishedAt), 'years')
       return `${years} years ago`;
     }
-
-
   }
+
+
+
 
 
   return (
@@ -60,24 +61,34 @@ export default function Home() {
         {
           videos.map(video => {
             return (
-              <SearchListItem key={video.id.videoId}>
-                <VideoThumbnailBox>
-                  <VideoThumbnail src={video.snippet.thumbnails.medium.url} />
-                </VideoThumbnailBox>
-                <VideoInfo>
-                  <VideoTitle>
-                    {video.snippet.title}
-                  </VideoTitle>
-                  <ChannelTitle>
-                    {video.snippet.channelTitle}
-                  </ChannelTitle>
-                  <DaysAgo>
-                    {
-                      renderDate(video.snippet.publishedAt)
-                    }
-                  </DaysAgo>
-                </VideoInfo>
-              </SearchListItem>
+              // video.id.kind === "youtube#playlist" && <>
+              <Link href={{
+                pathname: `/watch`,
+                query:{
+                  v:`${video.id.videoId?video.id.videoId:video.id.playlistId}`,
+                  t:`${video.id.kind}`
+                }
+              }}>
+                <SearchListItem key={video.id.videoId}>
+                  <VideoThumbnailBox>
+                    <VideoThumbnail src={video.snippet.thumbnails.medium.url} />
+                  </VideoThumbnailBox>
+                  <VideoInfo>
+                    <VideoTitle>
+                      {video.snippet.title}
+                    </VideoTitle>
+                    <ChannelTitle>
+                      {video.snippet.channelTitle}
+                    </ChannelTitle>
+                    <DaysAgo>
+                      {
+                        renderDate(video.snippet.publishedAt)
+                      }
+                    </DaysAgo>
+                  </VideoInfo>
+                </SearchListItem>
+              </Link>
+              // </>
             )
           })
         }
@@ -103,11 +114,11 @@ const SearchButton = tw.div`
 `
 
 const SearchResultList = tw.div`
-  mx-10 flex flex-col items-center mb-10
+  mx-10 flex flex-col items-center mb-10 
 `
 
 const SearchListItem = tw.div`
-  w-full flex m-2 border
+  w-full flex m-2 border cursor-pointer hover:bg-gray-200 ease-in-out delay-100 
 `
 
 const VideoThumbnailBox = tw.div` 
