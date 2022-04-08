@@ -100,7 +100,7 @@ export default function Home() {
 }
 
 const Wrapper = tw.div`
-  flex flex-1 bg-black-dark items-center justify-center flex-col text-white
+  flex flex-1 bg-black-dark items-center justify-center flex-col text-white max-w-1/2
 `
 const Title = tw.div`
   text-3xl mb-4 mt-10 tracking-wider
@@ -118,23 +118,23 @@ tracking-wider cursor-pointer border ml-2 border-black-dark bg-red text-white px
 `
 
 const SearchResultList = tw.div`
-  mx-10 flex flex-col items-center mb-10 
+  mx-10 flex flex-col items-center mb-10 w-2/3 mt-4 tracking-wide
 `
 
 const SearchListItem = tw.div`
-  w-full flex m-2 border cursor-pointer hover:bg-gray-200 ease-in-out delay-100 
+  w-full flex m-2 border border-black-light cursor-pointer hover:bg-black-light ease-in-out delay-100 
 `
 
 const VideoThumbnailBox = tw.div` 
-  h-30 w-60 mr-2 
+  h-48 w-80 flex-4
 `
 
 const VideoThumbnail = tw.img`
-  object-cover 
+  object-cover h-48 w-80 
 `
 
 const VideoInfo = tw.div`
-  flex flex-col items-start p-2
+  flex flex-col items-start p-2 flex-1
 `
 
 const VideoTitle = tw.div`

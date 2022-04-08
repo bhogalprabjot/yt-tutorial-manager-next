@@ -42,7 +42,7 @@ const Header = tw.header`
  `
 
 const Main = tw.main`
-    flex flex-1 
+    flex flex-1 bg-black-dark text-white
 `
 const Footer = tw.footer`
 `
