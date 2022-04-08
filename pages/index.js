@@ -55,8 +55,10 @@ export default function Home() {
   return (
     <Wrapper>
       <Title>Search any YT tutorial</Title>
-      <SearchBox name='search' value={search} onChange={handleChange} placeholder='search a keyword or paste a link' />
-      <SearchButton onClick={handleSearch}>Search</SearchButton>
+      <Search>
+        <SearchBox name='search' value={search} onChange={handleChange} placeholder='Search a keyword or paste a link' />
+        <SearchButton onClick={handleSearch}>SEARCH</SearchButton>
+      </Search>
       <SearchResultList>
         {
           videos.map(video => {
@@ -64,9 +66,9 @@ export default function Home() {
               // video.id.kind === "youtube#playlist" && <>
               <Link href={{
                 pathname: `/watch`,
-                query:{
-                  v:`${video.id.videoId?video.id.videoId:video.id.playlistId}`,
-                  t:`${video.id.kind}`
+                query: {
+                  v: `${video.id.videoId ? video.id.videoId : video.id.playlistId}`,
+                  t: `${video.id.kind}`
                 }
               }}>
                 <SearchListItem key={video.id.videoId}>
@@ -98,19 +100,21 @@ export default function Home() {
 }
 
 const Wrapper = tw.div`
-  flex flex-1 bg-gray-100 items-center justify-center flex-col
+  flex flex-1 bg-black-dark items-center justify-center flex-col text-white
 `
 const Title = tw.div`
-  text-3xl mb-4 mt-10
+  text-3xl mb-4 mt-10 tracking-wider
+`
+const Search = tw.div`
+  flex
 `
 
-
 const SearchBox = tw.input`
-  p-2 border border-black  rounded-xl w-80 mb-4
+  tracking-wider px-3 py-2  border border-black-dark w-80 mb-4 bg-black-light 
 `
 
 const SearchButton = tw.div`
-  cursor-pointer border bg-black text-white px-4 py-2 rounded-xl mb-5
+tracking-wider cursor-pointer border ml-2 border-black-dark bg-red text-white px-4 py-2  mb-4
 `
 
 const SearchResultList = tw.div`

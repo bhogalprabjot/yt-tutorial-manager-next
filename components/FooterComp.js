@@ -10,5 +10,5 @@ const FooterComp = () => {
 export default FooterComp;
 
 const Wrapper = tw.div`
-    text-center p-2 bg-black text-white
+    text-center p-2 bg-black-light text-white tracking-wider	
 `

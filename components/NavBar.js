@@ -6,7 +6,7 @@ const NavBar = () => {
         <Wrapper>
             <Logo>
                 <Link href='/'>
-                    YT Tutorial Manager
+                    <TitleText>YouTube Learning</TitleText>
                 </Link>
             </Logo>
             {/* TODO: Add conditional rendering here after setup of firebase auth */}
@@ -25,14 +25,20 @@ const NavBar = () => {
 export default NavBar;
 
 const Wrapper = tw.div`
-    p-2 bg-black text-white flex justify-between
+    p-4 bg-black-light text-white flex justify-between items-center tracking-wider
 `
 const Logo = tw.div`
-    ml-2
+    ml-4
 `
 const NavMenu = tw.div`
-    flex
+    flex items-center 
 `
 const NavItem = tw.div`
-    mr-3 cursor-pointer
+    mr-8 cursor-pointer
+`
+const Text = tw.div`
+    text-3xl
+`
+const TitleText = tw.div`
+    text-3xl text-red
 `
