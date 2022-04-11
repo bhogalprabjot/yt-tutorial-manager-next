@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import tw from "tailwind-styled-components"
 import { useRouter } from 'next/router'
-import youtube from '../api/youtube'
+import youtube from './api/youtube'
 
 
 const Watch = () => {
@@ -29,6 +29,7 @@ const Watch = () => {
 
 
   console.log('playlistItems', playlistItems);
+  console.log(v)
 
   if (t === 'youtube#video')
     videoURL = `https://www.youtube.com/embed/${v}`;
@@ -41,11 +42,10 @@ const Watch = () => {
       <PlayerContainer>
         <Player src={videoURL} allowFullScreen title="Player"></Player>
       </PlayerContainer>
-      <ListContainer>
+      {/* <ListContainer>
         {
           playlistItems && playlistItems.map((video) => (
-
-            <VideoTile>
+            v == video.id ? <VideoTileVisited>
               <VideoThumbnailBox>
                 <VideoThumbnail src={video.snippet.thumbnails.medium.url} />
               </VideoThumbnailBox>
@@ -58,10 +58,25 @@ const Watch = () => {
                 </ChannelTitle>
 
               </VideoInfo>
-            </VideoTile>
+            </VideoTileVisited>
+              :
+              <VideoTile>
+                <VideoThumbnailBox>
+                  <VideoThumbnail src={video.snippet.thumbnails.medium.url} />
+                </VideoThumbnailBox>
+                <VideoInfo>
+                  <VideoTitle>
+                    {video.snippet.title}
+                  </VideoTitle>
+                  <ChannelTitle>
+                    {video.snippet.channelTitle}
+                  </ChannelTitle>
+
+                </VideoInfo>
+              </VideoTile>
           ))
         }
-      </ListContainer>
+      </ListContainer> */}
     </Wrapper>
   )
 }
@@ -72,11 +87,11 @@ const Wrapper = tw.div`
   flex w-screen bg-black-dark text-white p-5 max-h-screen h-full 
 `
 const PlayerContainer = tw.div`
-  w-5/6
+  w-screen
 `
 
 const Player = tw.iframe`
-   aspect-video w-full
+   aspect-video w-full h-full
 `
 const ListContainer = tw.div` 
   border border-gray-500 p-2 mx-2 overflow-y-scroll overflow-x-hidden scrollbar scrollbar-thumb-white h-5/6 w-1/2
@@ -85,8 +100,10 @@ const ListContainer = tw.div`
 const VideoTile = tw.div` 
   mx-1 my-3 mr-4 flex justify-center h-32 w-full pr-3
  `
-
- const VideoThumbnailBox = tw.div` 
+ const VideoTileVisited = tw.div` 
+ mx-1 my-3 mr-4 flex justify-center h-32 w-full pr-3 bg-black-light
+`
+const VideoThumbnailBox = tw.div` 
   h-32 w-60 mr-2 flex-4
 `
 

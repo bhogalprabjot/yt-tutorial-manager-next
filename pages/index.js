@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import tw from "tailwind-styled-components"
 import Link from 'next/link'
-import youtube from '../api/youtube';
+import youtube from './api/youtube';
 import moment from 'moment';
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
         q: search
       }
     })
-    console.log(response.data.items);
+    console.log(response);
     setVideos(response.data.items);
   }
 
@@ -61,7 +61,7 @@ export default function Home() {
       </Search>
       <SearchResultList>
         {
-          videos.map(video => {
+          videos && videos.map(video => {
             return (
               // video.id.kind === "youtube#playlist" && <>
               <Link href={{
@@ -100,18 +100,20 @@ export default function Home() {
 }
 
 const Wrapper = tw.div`
-  flex flex-1 bg-black-dark items-center justify-center flex-col text-white max-w-1/2
+  flex flex-1 bg-black-dark items-center justify-center flex-col text-white max-w-1/2 
+
 `
 const Title = tw.div`
   text-3xl mb-4 mt-10 tracking-wider
+
 `
 const Search = tw.div`
-  flex
+  flex  
 `
 
 const SearchBox = tw.input`
   tracking-wider px-3 py-2  border border-black-dark w-80 mb-4 bg-black-light 
-`
+  `
 
 const SearchButton = tw.div`
 tracking-wider cursor-pointer border ml-2 border-black-dark bg-red text-white px-4 py-2  mb-4

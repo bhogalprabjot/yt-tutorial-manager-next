@@ -36,6 +36,7 @@ export default Layout;
 
 const LayoutWrapper = tw.div`
     h-screen  w-screen flex flex-col overflow-x-hidden scrollbar scrollbar-thumb-black-light
+
  `
 
 const Header = tw.header`
