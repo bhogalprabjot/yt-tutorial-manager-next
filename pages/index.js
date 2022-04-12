@@ -61,7 +61,7 @@ export default function Home() {
       </Search>
       <SearchResultList>
         {
-          videos && videos.map(video => {
+          videos && videos.map((video) => {
             return (
               // video.id.kind === "youtube#playlist" && <>
               <Link href={{
@@ -70,8 +70,8 @@ export default function Home() {
                   v: `${video.id.videoId ? video.id.videoId : video.id.playlistId}`,
                   t: `${video.id.kind}`
                 }
-              }}>
-                <SearchListItem key={video.id.videoId}>
+              }} key={video.id.videoId}>
+                <SearchListItem >
                   <VideoThumbnailBox>
                     <VideoThumbnail src={video.snippet.thumbnails.medium.url} />
                   </VideoThumbnailBox>
