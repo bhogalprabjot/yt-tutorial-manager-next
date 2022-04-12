@@ -61,9 +61,9 @@ export default function Home() {
       </Search>
       <SearchResultList>
         {
-          videos && videos.map((video,index) => (
+          videos && videos.map((video, index) => (
             // video.id.kind === "youtube#playlist" && <>
-            < div key={index}>
+            video.id.videoId && <div key={video.id.videoId}>
               <Link href={{
                 pathname: `/watch`,
                 query: {
