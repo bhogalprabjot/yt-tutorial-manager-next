@@ -6,14 +6,14 @@ const NavBar = () => {
     return (
         <Wrapper>
             <Logo>
-                <Link href='/'>
+                <Link href='/' passHref>
                     {/* <TitleText>YouTube Learning</TitleText> */}
                     <TitleText><TitleIcon><AiFillYoutube /></TitleIcon> Learning</TitleText>
                 </Link>
             </Logo>
             {/* TODO: Add conditional rendering here after setup of firebase auth */}
             <NavMenu>
-                <Link href='/my-learning'>
+                <Link href='/my-learning' passHref>
                     <NavItem>My Learning</NavItem>
                 </Link>
                 {/* TODO think another name for MyStats */}

@@ -61,17 +61,17 @@ export default function Home() {
       </Search>
       <SearchResultList>
         {
-          videos && videos.map((video) => {
-            return (
-              // video.id.kind === "youtube#playlist" && <>
+          videos && videos.map((video,index) => (
+            // video.id.kind === "youtube#playlist" && <>
+            < div key={index}>
               <Link href={{
                 pathname: `/watch`,
                 query: {
                   v: `${video.id.videoId ? video.id.videoId : video.id.playlistId}`,
                   t: `${video.id.kind}`
                 }
-              }} key={video.id.videoId}>
-                <SearchListItem >
+              }} passHref>
+                <SearchListItem>
                   <VideoThumbnailBox>
                     <VideoThumbnail src={video.snippet.thumbnails.medium.url} />
                   </VideoThumbnailBox>
@@ -90,9 +90,9 @@ export default function Home() {
                   </VideoInfo>
                 </SearchListItem>
               </Link>
-              // </>
-            )
-          })
+            </div>
+          )
+          )
         }
       </SearchResultList>
     </Wrapper>
