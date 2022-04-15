@@ -71,6 +71,7 @@ export default function Home() {
                   t: `${video.id.kind}`
                 }
               }} passHref>
+
                 <SearchListItem>
                   <VideoThumbnailBox>
                     <VideoThumbnail src={video.snippet.thumbnails.medium.url} />
@@ -89,6 +90,32 @@ export default function Home() {
                     </DaysAgo>
                   </VideoInfo>
                 </SearchListItem>
+              </Link>
+              <Link href={{
+                pathname: `/watch`,
+                query: {
+                  v: `${video.id.videoId ? video.id.videoId : video.id.playlistId}`,
+                  t: `${video.id.kind}`
+                }
+              }} passHref>
+                <SearchListMobileItem>
+                  <VideoThumbnailBoxMobile>
+                    <VideoThumbnailMobile src={video.snippet.thumbnails.medium.url} />
+                  </VideoThumbnailBoxMobile>
+                  <VideoInfo>
+                    <VideoTitle>
+                      {video.snippet.title}
+                    </VideoTitle>
+                    <ChannelTitle>
+                      {video.snippet.channelTitle}
+                    </ChannelTitle>
+                    <DaysAgo>
+                      {
+                        renderDate(video.snippet.publishedAt)
+                      }
+                    </DaysAgo>
+                  </VideoInfo>
+                </SearchListMobileItem>
               </Link>
             </div>
           )
@@ -112,7 +139,7 @@ const Search = tw.div`
 `
 
 const SearchBox = tw.input`
-  tracking-wider px-3 py-2  border border-black-dark w-80 mb-4 bg-black-light 
+  tracking-wider px-3 py-2  border border-black-dark w-80 mb-4 bg-black-light md: w-44
   `
 
 const SearchButton = tw.div`
@@ -120,17 +147,16 @@ tracking-wider cursor-pointer border ml-2 border-black-dark bg-red text-white px
 `
 
 const SearchResultList = tw.div`
-  mx-10 flex flex-col items-center mb-10 w-2/3 mt-4 tracking-wide
+  mx-10 mb-10 w-2/3 mt-4 tracking-wide grid-cols-1 
 `
 
 const SearchListItem = tw.div`
-  w-full flex m-2 border border-black-light cursor-pointer hover:bg-black-light ease-in-out delay-100 
+  w-full flex m-2 border border-black-light cursor-pointer hover:bg-black-light ease-in-out delay-100 hidden md:flex 
 `
 
 const VideoThumbnailBox = tw.div` 
   h-48 w-80 flex-4
 `
-
 const VideoThumbnail = tw.img`
   object-cover h-48 w-80 
 `
@@ -149,4 +175,17 @@ const ChannelTitle = tw.div`
 const DaysAgo = tw.div`
   text-sm
 
+`
+
+
+
+const SearchListMobileItem = tw.div`
+  w-full mt-2 border border-black-light cursor-pointer hover:bg-black-light ease-in-out delay-100 md:hidden
+
+`
+const VideoThumbnailBoxMobile = tw.div` 
+  h-48 w-full flex-4 md:hidden
+`
+const VideoThumbnailMobile = tw.img`
+  object-cover h-48 w-full  md:hidden
 `
