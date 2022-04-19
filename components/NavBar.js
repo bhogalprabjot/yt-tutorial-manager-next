@@ -3,13 +3,17 @@ import tw from "tailwind-styled-components"
 import Link from 'next/link'
 import { AiFillYoutube } from 'react-icons/ai/index'
 import { GiHamburgerMenu } from 'react-icons/gi'
-const NavBar = () => {
+import SideBar from './SideBar'
+
+const NavBar = ({handleToggleSidebar}) => {
+  
+
     return (
         <Wrapper>
+            
             <LeftSide>
-
                 <MobileMenu>
-                    <GiHamburgerMenu />
+                    <GiHamburgerMenu size={25} onClick={handleToggleSidebar} />
                 </MobileMenu>
                 <Logo>
                     <Link href='/' passHref>
@@ -17,8 +21,13 @@ const NavBar = () => {
                         <TitleText><TitleIcon><AiFillYoutube /></TitleIcon> Learning</TitleText>
                     </Link>
                 </Logo>
+
+
+                
+
             </LeftSide>
             {/* TODO: Add conditional rendering here after setup of firebase auth */}
+
             <NavMenu>
                 <NavItems>
 
@@ -34,6 +43,7 @@ const NavBar = () => {
                 </NavItems>
                 <UserAvatar src='tutorial.jpg' />
             </NavMenu>
+            
         </Wrapper>
     )
 }
