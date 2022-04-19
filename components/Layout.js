@@ -2,8 +2,16 @@ import React from 'react'
 import tw from "tailwind-styled-components"
 import FooterComp from './FooterComp';
 import NavBar from './NavBar';
+import SideBar from './SideBar';
+import { useState } from 'react'
+
+
 
 const Layout = ({ children }) => {
+    const [sidebar, toggleSidebar] = useState(false);
+    const handleToggleSidebar = () => {
+        toggleSidebar(!sidebar);
+    };
     return (
         <>
             <head>
@@ -20,10 +28,14 @@ const Layout = ({ children }) => {
                     <Footer />
                 </footer> */}
                 <Header>
-                    <NavBar />
+                    <NavBar handleToggleSidebar={handleToggleSidebar} />
                 </Header>
+
                 <Main>
-                    {children}
+                    {
+                        sidebar ? <SideBar handleToggleSidebar={handleToggleSidebar} /> :
+                            children
+                    }
                 </Main>
                 {/* <Footer ><FooterComp /></Footer> */}
             </LayoutWrapper>
@@ -43,7 +55,7 @@ const Header = tw.header`
  `
 
 const Main = tw.main`
-    flex flex-1 bg-black-dark text-white
+    flex flex-1 bg-black-dark text-white 
 `
 const Footer = tw.footer`
 `
