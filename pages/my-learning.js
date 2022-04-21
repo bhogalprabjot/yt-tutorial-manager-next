@@ -1,8 +1,25 @@
 import React from 'react'
 import tw from "tailwind-styled-components"
 import { dummyList } from '../public/dummyLearning'
+import { useRouter } from 'next/router'
+
+import { useState, useEffect } from 'react'
+
+import { auth, provider } from "../Firebase"
 
 const MyLearning = () => {
+
+  const router = useRouter();
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        router.push('/');
+      }
+    })
+  }, []);
+
+
+
 
   console.log(dummyList)
   return (
