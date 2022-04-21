@@ -3,7 +3,7 @@ import tw from "tailwind-styled-components"
 import { useRouter } from 'next/router'
 
 import youtube from './api/youtube'
-
+import { auth, provider } from "../Firebase"
 
 const Watch = () => {
 
@@ -17,15 +17,21 @@ const Watch = () => {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(async () => {
-    if (t === 'youtube#playlist') {
-      response = await youtube.get('/playlistItems', {
-        params: {
-          playlistId: v
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        router.push('/');
+      } else {
+        if (t === 'youtube#playlist') {
+          response = await youtube.get('/playlistItems', {
+            params: {
+              playlistId: v
+            }
+          })
+          // setShouldRender(false)
+          setPlaylistItems(response?.data?.items)
         }
-      })
-      // setShouldRender(false)
-      setPlaylistItems(response?.data?.items)
-    }
+      }
+    })
   }, [v])
 
 
@@ -101,7 +107,7 @@ const ListContainer = tw.div`
 const VideoTile = tw.div` 
   mx-1 my-3 mr-4 flex justify-center h-32 w-full pr-3
  `
- const VideoTileVisited = tw.div` 
+const VideoTileVisited = tw.div` 
  mx-1 my-3 mr-4 flex justify-center h-32 w-full pr-3 bg-black-light
 `
 const VideoThumbnailBox = tw.div` 

@@ -1,22 +1,35 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import tw from "tailwind-styled-components"
 import Link from 'next/link'
 import youtube from './api/youtube';
 import moment from 'moment';
+import { auth, provider } from "../Firebase"
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
   // const [selectedVideo, setSelectedVideo] = useState(null);
   const [search, setSearch] = useState('');
-
+  const router = useRouter();
   let current = new Date();
   console.log(current.toISOString());
   const handleChange = (e) => {
     // console.log(search);
     setSearch(e.target.value);
   }
+
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        router.push('/');
+      }
+    })
+  }, []);
+
+
 
   const handleSearch = async () => {
     console.log(search);
